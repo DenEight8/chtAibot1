@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Кошик{% endblock %}
+
+{% block content %}
+<h1>Ваш кошик</h1>
+{% if cart_items %}
+<table class="table">
+  <thead>
+    <tr>
+      <th>Товар</th>
+      <th>Кількість</th>
+      <th>Ціна</th>
+      <th>Дії</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in cart_items %}
+    <tr id="cart-item-{{ item.id }}">
+      <td>{{ item.product.name }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.product.price|floatformat:2 }} ₴</td>
+      <td>
+        <button class="btn btn-danger btn-sm remove-item-btn" data-item="{{ item.id }}">Видалити</button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><b>Всього: </b>{{ cart_total }} ₴</p>
+{% else %}
+<p>Кошик порожній.</p>
+{% endif %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.remove-item-btn').forEach(btn => {
+    btn.onclick = function () {
+      const itemId = this.getAttribute('data-item');
+      fetch(`/cart/remove/${itemId}/`, { method: 'POST', headers: {'X-CSRFToken': '{{ csrf_token }}'} })
+        .then(() => window.location.reload());
+    }
+  });
+});
+</script>
+{% endblock %}

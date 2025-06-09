@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% block title %}Мій профіль | Dango{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Привіт, {{ request.user.username }}!</h1>
+
+<h3 class="h5">Останні замовлення</h3>
+{% if orders %}
+  <ul class="list-group mb-4">
+    {% for o in orders %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        Замовлення №{{ o.id }} від {{ o.created|date:"d.m.Y H:i" }}
+        <span class="badge bg-secondary rounded-pill">{{ o.total_price }} ₴</span>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Замовлень поки немає.</p>
+{% endif %}
+{% endblock %}

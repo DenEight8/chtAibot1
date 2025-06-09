@@ -1,0 +1,49 @@
+#dango-chat-toggle {
+    transition: box-shadow 0.2s;
+}
+#dango-chat-toggle:hover {
+    box-shadow: 0 8px 16px #e6001266;
+}
+#dango-chat-widget {
+    animation: chatOpen 0.23s;
+}
+@keyframes chatOpen {
+    from {transform: translateY(30px) scale(0.92); opacity:0;}
+    to {transform: none; opacity:1;}
+}
+#dango-chat-messages {
+    overflow-y: auto;
+    min-height: 120px;
+    max-height: 340px;
+}
+.dango-message {
+    background: #f6f6f6;
+    border-radius: 16px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    display: inline-block;
+    max-width: 90%;
+}
+.dango-message.bot {
+    background: #e9f2ff;
+    color: #14467a;
+    margin-right: auto;
+}
+.dango-message.user {
+    background: #e60012;
+    color: #fff;
+    margin-left: auto;
+    text-align: right;
+}
+@media (max-width: 480px) {
+    #dango-chat-widget {
+        right: 4vw !important;
+        bottom: 4vw !important;
+        width: 96vw !important;
+        min-width: 0;
+    }
+    #dango-chat-toggle {
+        right: 4vw !important;
+        bottom: 4vw !important;
+    }
+}

@@ -1,0 +1,166 @@
+[
+  {
+    "model": "shop.category",
+    "pk": 1,
+    "fields": {
+      "name": "Електроніка",
+      "slug": "electronics"
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "name": "LOOP LiFePO4 48 V 100 Ah",
+      "slug": "loop-lifepo4-48v-100ah",
+      "description": "Серверний акумулятор LiFePO₄ 100 А·год.",
+      "price": "45000.00",
+      "image": "products/844761001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "name": "Lenovo Legion 9i eGPU set",
+      "slug": "lenovo-legion-9i-egpu",
+      "description": "Ігровий ноутбук + зовнішній RTX 4090.",
+      "price": "135000.00",
+      "image": "products/844762001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "name": "Sony FE 24-70 мм f/2.8 GM II",
+      "slug": "sony-24-70-gm2",
+      "description": "Професійний об’єктив серії G Master.",
+      "price": "74999.00",
+      "image": "products/844768001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "name": "CoinStar PRO C800",
+      "slug": "coinstar-pro-c800",
+      "description": "Автомат сортування та рахунку монет.",
+      "price": "98000.00",
+      "image": "products/844909001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "name": "Bambu Lab X1 Carbon",
+      "slug": "bambu-x1-carbon",
+      "description": "Швидкісний 3D-принтер з AMS-податчиком.",
+      "price": "56999.00",
+      "image": "products/844914001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 6,
+    "fields": {
+      "category": 1,
+      "name": "Samsung 65″ Neo QLED 8K",
+      "slug": "samsung-neo-qled-65",
+      "description": "Флагманський 8K телевізор Mini-LED.",
+      "price": "119999.00",
+      "image": "products/844947001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 7,
+    "fields": {
+      "category": 1,
+      "name": "ASUS Zenbook 14 OLED (Blue)",
+      "slug": "zenbook-14-oled-blue",
+      "description": "14″ OLED, Core Ultra, 1 ТБ SSD.",
+      "price": "48999.00",
+      "image": "products/845021001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 8,
+    "fields": {
+      "category": 1,
+      "name": "ASUS Zenbook 14 OLED (Silver)",
+      "slug": "zenbook-14-oled-silver",
+      "description": "14″ OLED, Ryzen 7 8840HS.",
+      "price": "45999.00",
+      "image": "products/845022001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 9,
+    "fields": {
+      "category": 1,
+      "name": "LOOP LFP Rack 5 кВт·год",
+      "slug": "loop-lfp-rack-5kwh",
+      "description": "LiFePO₄ резервне живлення 5 кВт·год.",
+      "price": "39500.00",
+      "image": "products/844760001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 10,
+    "fields": {
+      "category": 1,
+      "name": "LOOP LFP Rack 10 кВт·год",
+      "slug": "loop-lfp-rack-10kwh",
+      "description": "LiFePO₄ станція 10 кВт·год.",
+      "price": "74900.00",
+      "image": "products/844761001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 11,
+    "fields": {
+      "category": 1,
+      "name": "ASUS ROG Flow Z13",
+      "slug": "asus-rog-flow-z13",
+      "description": "Ігровий планшет-ноутбук RTX 4060.",
+      "price": "69999.00",
+      "image": "products/844764001.250.jpg",
+      "in_stock": true
+    }
+  },
+  {
+    "model": "shop.product",
+    "pk": 12,
+    "fields": {
+      "category": 1,
+      "name": "Bambu Lab AMS Combo",
+      "slug": "bambu-ams-combo",
+      "description": "Автоматична зміна до 4 філаментів.",
+      "price": "12999.00",
+      "image": "products/844909001.250.jpg",
+      "in_stock": true
+    }
+  }
+]

@@ -1,0 +1,787 @@
+@media screen and (min-width: 1200px) {
+    .footer2 .col {
+        line-height: unset !important;
+    }
+}
+
+div.error {
+  max-width: 350px;
+}
+
+.menu_wrapper .hidden-sm .hidden-md .hidden-lg {
+    width: 100%!important;
+}
+
+/*.wa-form .wa-field .wa-value {
+    margin-left: 30px ! important;
+
+}*/
+
+.h_menu1 .menu > li > .link a {
+    margin-left: 30px;
+}
+
+.h_menu2 .menu > li > .link a > i {
+    color: #fff;
+}
+
+.onestep-cart table.cart td {
+    padding: 1px 7px 1px !important;
+}
+
+.checkout .checkout-step-content {
+    padding: 10px 10px 10px 10px!important;
+}
+
+.onestep-cart .checkout .checkout-step h2 {
+    padding: 10px 20px 10px 20px!important;
+}
+
+.onestep-cart .checkout ul.checkout-options li .wa-form {
+    margin-bottom: 1px!important;
+}
+.checkout ul.checkout-options li .wa-form {
+    margin-bottom: 1px!important;
+}
+
+
+ul {
+    margin-bottom: 7px;
+}
+
+.product_page .pp_short_description {
+    font-size: 16px;
+}
+
+
+.product_page .stocks {
+    font-size: 18px;
+}
+
+.product_page .articul {
+    font-size: 18px;
+}
+
+.badge-wrapper .badge.discount span {
+    padding: 0 0px !important;
+}
+
+.buy1step-form__step + .buy1step-form__step {
+    margin-top: 0px !important;
+}
+
+.checkout ul.checkout-options li {
+  margin-bottom: 5px !important;
+}
+
+.strikeout {
+  font-size: 1.1em;
+  line-height: 1em;
+  position: relative;
+
+}
+.strikeout::after {
+  border-bottom: 0.125em solid red;
+  content: "";
+  left: 0;
+  margin-top: calc(0.125em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -ms-transform: rotate(-70deg);
+  -webkit-transform: rotate(-70deg);
+  transform: rotate(-70deg);
+}
+
+@media screen and (min-width: 992px){
+.col-md-2 {
+    width: 16.66667% !important;
+}
+
+.col-md-7 {
+    width: 58.33333% !important;
+}
+}
+
+#header .h_search {
+    float: left;
+}
+
+.select2-container {
+    max-width: 50%;
+}
+/* 
+@media screen and (max-width: 768px) {
+html {
+    zoom:75%!important;}    
+}
+
+
+
+@media screen and (max-width: 1367px) {
+html {
+    zoom:90%!important;}    
+}
+
+@media screen and (max-width: 1450px) {
+html {
+    zoom:100%!important;}    
+} 
+*/
+@media (min-width: 0px) and (max-width: 767px) {
+    .mt-xs-0 { padding: 0px 0px 0px 0px; }
+
+}
+
+/*.goog-te-banner-frame.skiptranslate {
+    display: none !important;
+    } 
+body {
+    top: 0px !important; 
+    }
+*/    
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  /*border-radius: 5px;*/
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Buttons */
+::-webkit-scrollbar-button:single-button {
+  /*background-color: #bbbbbb;*/
+  color: #f1f1f1;
+  display: block;
+  border-style: solid;
+  height: 22px;
+  width: 7px;
+}
+/* Up */
+::-webkit-scrollbar-button:single-button:vertical:decrement {
+  border-width: 0 8px 8px 8px;
+  border-color: transparent transparent #b8b6b6 transparent;
+}
+
+::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+  border-color: transparent transparent #b8b6b6 transparent;
+}
+/* Down */
+::-webkit-scrollbar-button:single-button:vertical:increment {
+  border-width: 8px 8px 0 8px;
+  border-color: #b8b6b6 transparent transparent transparent;
+}
+
+::-webkit-scrollbar-button:vertical:single-button:increment:hover {
+  border-color: #b8b6b6 transparent transparent transparent;
+}
+    
+
+.onestep-cart .checkout ul.checkout-options li {
+    list-style: none;
+    position: relative;
+    margin-bottom: 1px;
+    clear: both;
+}
+
+.checkout .checkout-step-content {
+  padding: 13px 0px 7px;
+  margin-bottom: 1px;
+}
+
+.wa-value{
+  max-width: 100%!important;
+}
+
+.wa-form {
+  width:100%!important;   
+}
+
+.map-responsive{
+    overflow:hidden;
+    padding-bottom:10%;
+    position:relative;
+    height:0;
+    min-height: 150px!important;
+}
+.map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+
+}
+
+
+.reviews-branch-shop {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.qty_wrap {
+    margin-bottom: 10px;
+}
+
+.services {
+    color: red;
+}
+.seo_hContent h2 {
+color: #a6a6a6;
+}
+
+.seo_sContent h2 {
+color: #a6a6a6;
+}
+
+
+.seo_hContent  {
+text-align: justify; 
+font-size: 12px; 
+margin-top: 0.5em; 
+margin-bottom: 0.5em;
+color: #a6a6a6;
+height: 230px;
+overflow: hidden;
+}
+
+a.seo-show-more 
+{
+    color: #a6a6a6;
+}
+
+.seo_sContent  {
+text-align: justify; 
+font-size: 12px; 
+margin-top: 0.5em; 
+margin-bottom: 0.5em;
+color: #a6a6a6;
+ height: auto;
+overflow: hidden;
+}
+
+.side_gallery li img {
+  width: 52px !important;
+  height: 52px !important;
+}
+
+  .side_menu_wrap .menu > li > .link > a,
+  .sub_one_level li > .link > a {
+    padding: 5px 18px;
+}
+
+.h_cart a:not(.empty) .icon {
+  border: 1px solid #597a53 !important;
+  background-color: #64895d !important;
+  background-image: -webkit-linear-gradient(top, #6f9867 0%, #597a53 100%) !important;
+  background-image: -o-linear-gradient(top, #6f9867 0%, #597a53 100%) !important;
+  background-image: linear-gradient(to bottom, #6f9867 0%, #597a53 100%) !important;
+  background-repeat: repeat-x !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF6F9867', endColorstr='#FF597A53', GradientType=0) !important;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false) !important;
+  background-repeat: repeat-x !important;
+  -webkit-box-shadow: none !important;
+  -webkit-box-shadow: 0 3px 0 0 #6f9867 !important;
+  box-shadow: 0 3px 0 0 #6f9867 !important;
+
+}
+
+.h_cart a:not(.empty) .icon::after {
+    filter: brightness(0) invert(1);
+}
+
+.product_page .add2cart .buy_buttons > .btn-primary {
+  font-size: 24px;
+  padding: 7px 16px;
+  margin-right: 10px;
+}
+
+.product_page .add2cart .buy_buttons > .btn-secondary {
+  font-size: 24px;
+  padding: 7px 16px;
+  margin-right: 10px;
+}
+
+.product-list .stock.ask {
+  color: #a80;
+}
+
+span.reverse {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.articul {
+    margin: 0 0 20px;
+    color: green !important;
+}
+
+
+
+.filters .filter-param-in {
+    max-height: 15em;
+    overflow-y: auto;
+}
+
+.filters span i, .filters h5 i { text-indent:0 !important;}
+.filters span i, .filters h5 i { background-image: none;}
+.filters .collapsed span i, .filters .collapsed h5 i { background-image: none;}
+
+.fa-bars-supreme { 
+    color: inherit;
+    vertical-align: middle;
+    font-size: 21px;
+    margin: -4px 10px 0px 0;
+}
+
+  #header .row .col {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+ #homeslider_photos .item {
+    background-position: 100% 0;
+}
+/* Главное меню
+========= */
+.menubar .menu li .sub_one_level, .menubar .menu li .sub_one_level .submenu {
+    height: 535px;
+}
+
+.side_menu_wrap .menu > li > .link > a, .sub_one_level li > .link > a {
+    white-space: nowrap;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width : 99%;
+}
+
+.side_menu_wrap .menu > li.hassub > .link > a:after, .sub_one_level li.hassub > .link > a:after {
+    top: 0;
+    right: -1px;
+    padding: 6px 6px 6px 6px;
+    /*height: 37px;*/
+    height: 100%;
+    width: 25px;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.25) 0%, #fff 45%);
+    background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.25) 0%, #fff 45%);
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.25) 0%, #fff 45%);
+    background: linear-gradient('to right', rgba(255, 255, 255, 0.25) 0%, #fff 45%);
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    overflow: hidden;
+    color: #777777;
+    position: absolute;
+    content: "\f105";
+    text-decoration: none !important;
+}
+
+.side_menu_wrap .menu > li.shadow > .link > a:after, .sub_one_level li.shadow > .link > a:after {
+    color: transparent !important;
+}
+
+
+/* Боковое меню
+======== */
+.side_menu_wrap {
+  border: 1px solid #eeeeee;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+  .h_menu2 .menu_wrapper.fluid .menu > li > .link a {
+    text-align: left;
+  }
+
+.side_block_collapsible ul.menu > li.hassub {
+    position: inherit;
+}
+
+.side_block_collapsible .menu li .sub_one_level, .side_block_collapsible .menu li .sub_one_level .submenu {
+    height: 535px;
+
+}
+/* Основное содержимое
+========= */
+
+@media screen and (max-width: 767px) {
+.w-sidebar 
+{
+    margin-top: 52px;
+}
+.sidebar-xs 
+{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+}
+
+.page_wrapper
+{
+    margin-top: 10px;    
+}
+
+
+#header .row .h_cart .in a
+{
+    right: 15px;
+    position: absolute;
+    top: 6px;    
+}
+
+
+#header .h_search form
+{
+    max-width: unset;
+    margin-right: 10px;
+}
+
+#header .h_search form
+{
+    max-width: unset; 
+}
+
+@media screen and (min-width: 768px) {
+.top_header_contacts
+{
+    white-space: nowrap;
+    overflow : hidden;
+    margin-right: 10px;
+}
+}
+
+@media screen and (max-width: 767px) {
+.mistake-plugin-wrap
+{
+    display: none;
+}
+}
+
+label.disabled > a {
+       pointer-events: none;
+       cursor: default;
+       color: #777;
+}
+
+/* Список категорий в поиске
+========= */
+
+.catlist { padding: 25px 0 30px; }
+.catlist-item { width: 100%; margin: 0 0 20px; display: block; vertical-align: top; }
+.catlist-item-in { padding-right: 10px; }
+.catlist-item-in.with-logo { display: inline-block; vertical-align: top; width: 65%; }
+.catlist-item-in-image { display: inline-block; vertical-align: top; width: 25%; padding-right: 10px; }
+.catlist-item-in-image img { max-height: 100%; max-width: 100%; }
+.catlist-item-title { font-size: 16px; }
+.catlist-item-sublist { padding: 0px 0 0; color: #8f8f8f; }
+.catlist-item-sublist-item.with-logo { display: inline-block; vertical-align: top; width: 29%; margin: 0 3% 15px 0; }
+.catlist-item-sublist-item.hidden1 { display: none; }
+.catlist-item-sublist-image { height: 85px; width: 100%; margin-bottom: 5px; }
+.catlist-item-sublist-image img { max-height: 100%; max-width: 100%; }
+.catlist-item-more { padding: 15px 0 0; }
+.catlist-item-more-link { }
+.ico_list { width: 15px; height: 15px; background-position: -67px -31px; margin-right: 7px; }
+
+
+/*=====================/wa-apps/shop/plugins/mistake=========================*/
+/*=====================Форма отправки сообщения об ошибке=========================*/
+form#mistake-form { 					
+font-size: 14px; 
+font-weight: bold;
+text-align: left
+}
+/*=============================Блок подсказки=====================================*/
+.mistake-show-hint.fixed { 			
+position: fixed;
+top: 200px;
+right: -231px;
+width: 227px;
+line-height: 1.5;
+z-index: 7000;
+}
+/*================================Иконка жука в подсказке==========================*/
+.fixed .mistake-icon-hint { 			
+height: 64px;
+width: 64px;
+background: url("/wa-apps/shop/plugins/mistake/img/bugs.png"); 
+position: absolute;
+top: 25px;
+right: 236px;
+}
+/*====================Блок подсказки при наведении на него=========================*/
+.mistake-show-hint.fixed:hover { 	
+right: 0;
+}
+/*=======================Форма отправки сообщения об ошибке========================*/
+#mistake-form-wrap { 
+position: fixed;
+top: 15%;
+left: 0;
+right: 0;
+opacity: 1;
+z-index: 2101;
+overflow-x: hidden;
+box-shadow: 0 3px 15px #333;
+margin: 0 auto;
+text-align: left;
+background: #fff;
+width: 400px;
+}
+/*===============Фон всего сайта при вызове формы отправки письма===================*/
+#mistake-background {  
+background: url("/wa-apps/shop/plugins/mistake/img/bg1.png"); 
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+z-index: 2100;
+}
+/*================Иконка закрытия формы при наведении (крестик)=====================*/
+#mistake-form-close:hover { 			
+ background-position: 0px 0px; 
+}
+/*=====================Иконка закрытия формы (крестик)==============================*/
+#mistake-form-close {   				
+cursor: pointer;
+background: url("/wa-apps/shop/plugins/mistake/img/icon.png");
+width: 14px;
+text-align: center;
+position: absolute;
+top: 3px;
+right: 3px;
+height: 15px;
+background-position: -16px 0px;
+}
+/*=======================Окно ввода комментария======================================*/
+.mistake-form-comment {   			
+max-width: 370px;
+margin-bottom: 10px !important;
+width: 370px;
+display: block;
+margin: 0 10px;
+margin: 0 auto 10px;
+} 
+/*===========================Заголовок формы отправки================================*/
+#mistake-form h2 {					
+color: #473b39;
+font-weight: bold;
+padding-left: 10px;
+border: 1px solid #d4d4d4;
+width: 358px;
+top: 15%;
+left: 0px;
+right: 0px;
+margin: 0px auto !important;
+z-index: 3002;
+padding: 15px 20px;
+font-size: 20px;
+border-width: 1px;
+border-style: solid;
+box-shadow: 0px 3px 15px #DDD;
+background: none repeat scroll 0% 0% #F5F5F5;
+text-align:center;
+}
+/*===============Заголовоки "Текст с ошибкой:" и "Комментарий:" на форме==============*/
+#mistake-form h3 { 					
+color: #473b39;
+font-weight: bold;
+font-size: 16px;
+padding: 0px 10px;
+margin: 20px 0px 7px;
+}
+/*===========================Кнопка отправки сообщения================================*/
+.mistake-form-submit {  				
+padding: 6px 0px 20px 0px;
+font-weight: bold;
+font-size: 15px;
+text-align:center;
+}
+/*==============================Текст ошибки==========================================*/
+#mistake-form-content { 				
+margin-bottom: 10px;
+font-weight: normal;
+font-size: 13px;
+background: #FF0;
+padding: 10px;
+margin: 0px 10px;
+border: 3px dotted red; 
+}
+/*================================Сообщение о статусе письма==========================*/
+.mistake-mass {  							
+text-align: center;
+padding: 20px;
+font-size: 18px;
+}
+/*=======================Стиль выделенного текста в подсказке=========================*/
+.target { 							
+background: #b3d4fc; 
+}
+/*=======================Оформление кнопок в тексте подсказки=========================*/
+.knopka { 							
+border: 1px solid #a5a6aa; 
+display: inline-block;
+padding: 3px;
+background: #f1f1f1;
+border-radius: 4px;
+box-shadow: 1px 3px 5px grey; 
+}
+/*======================Блок подсказки ошибки, часть с текстом========================*/
+.mistake-text-hint { 				
+padding: 10px; 
+border: 1px solid #dee2e5;
+background: white;
+}
+/*========================Гифка при отправки сообщения================================*/
+#mistake-form-wrap img {			
+ margin: 0 0 0 50%;
+ position: relative;
+}
+
+/*========================Акция в карточке товара================================*/
+ .sale_wrapper {
+  margin: 0 0 20px;
+  border: 1px solid #DEDEDE;
+  border-radius: 0 0 5px 5px;
+  padding: 5px 10px;
+}
+.sale_title {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.sale_timer {
+  margin-bottom: 5px;
+}
+.sale_timer i {
+  margin-right: 5px;
+}
+.sale_ankor {
+  padding-left: 19px;
+  font-size: 0.9em;
+}
+.sale_ankor i {
+  margin-left: 5px;
+  font-size: 0.7em;
+}
+.sale_ankor a, .sale_ankor i {
+  color: blue;
+}
+.sale_title, .sale_timer i {
+  color: red;
+}
+
+.badge-wrapper {
+	z-index: unset;
+}
+
+.badge-wrapper .badge a {
+	display: table-cell;
+	vertical-align: middle;
+	padding: 0px 0px;
+	color: #fff;
+}
+.badge-wrapper .badge {
+	-moz-border-radius: 0px 5px 5px 0px;
+    -webkit-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+
+.image_wrap .badge-wrapper .badge.promo {
+    font-size: 10px;
+    height: 100%;
+}
+
+
+.badge {
+    opacity: 0.9;
+}
+/*========================Купить в 1 клик без попап================================*/
+    .oneClick_wrapper {
+        width: 100%;
+        margin-top: 10px;
+        display: none !important;
+    }
+    .oneClick_wrapper input, .oneClick_button {
+        font-size: 14px;
+        padding: 7px 5px;
+        display: inline-block;
+        border: 1px solid #2769a6;
+        float: left;
+        display: none !important;
+    }
+    .oneClick_wrapper input {
+        border-radius: 5px 0 0 5px;
+        color: #999;
+        width: 115px;
+        display: none !important;
+    }
+    .oneClick_button {
+        width: 135px;
+        background: #5d87ba; /* Old browsers */
+        background: -moz-linear-gradient(top,  #5d87ba 0%, #2769a6 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top,  #5d87ba 0%,#2769a6 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,  #5d87ba 0%,#2769a6 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5d87ba', endColorstr='#2769a6',GradientType=0 ); /* IE6-9 */
+        color: #fff;
+        border-radius: 0 5px 5px 0;
+        display: none !important;
+    }
+    .oneClick_button:hover, .oneClick_button:active, .oneClick_button:focus {
+        background: #2769a6;
+
+    }
+    .oneClick_message {
+        font-size: 1.2em;
+        display: block;
+        padding: 10px 15px;
+    }
+    .oneClick_message.success {
+        color: green;
+    }
+    .oneClick_message.error {
+        color: red;
+    }
+  
+    .clearfix {
+        clear: both;
+    }
+    @media (max-width: 1200px) {
+        .oneClick_wrapper input {
+            width: 100%;
+            border-radius: 5px;
+            display: none !important;
+        }
+        .oneClick_button {
+            margin-top: 10px;
+            width: 100%;
+            border-radius: 5px;
+            display: none !important;
+        }
+    }
+    @media (max-width: 767px) {
+        .oneClick_wrapper input {
+            width: 115px;
+            border-radius: 5px 0 0 5px;
+
+        }
+        .oneClick_button {
+            margin-top: 0;
+            width: 135px;
+            border-radius: 0 5px 5px 0;
+            display: none !important;
+        }
+    }

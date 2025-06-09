@@ -1,0 +1,12 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Оформлення замовлення</h3>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Замовити</button>
+    </form>
+    <a href="{% url 'cart' %}">← Назад до кошика</a>
+</div>
+{% endblock %}

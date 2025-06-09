@@ -1,0 +1,59 @@
+:root {
+  --jp-red: #e60026;
+  --jp-gold: #ffd700;
+  --jp-bg: #fffdf8;
+  --jp-shadow: 0 4px 16px rgba(230,0,38,0.08);
+  --jp-font: 'Noto Sans JP', 'Segoe UI', Arial, sans-serif;
+}
+body {
+  background: var(--jp-bg);
+  font-family: var(--jp-font);
+}
+.jp-navbar {
+  background: #fff;
+  border-bottom: 2px solid var(--jp-red);
+  box-shadow: var(--jp-shadow);
+}
+.jp-logo {
+  color: var(--jp-red);
+  letter-spacing: 2px;
+  font-weight: 700;
+  font-size: 1.4em;
+}
+.jp-logo span {
+  color: var(--jp-gold);
+  font-size: .7em;
+  margin-left: 2px;
+  vertical-align: middle;
+  font-family: 'Noto Serif JP', serif;
+}
+.btn-jp-red, .btn-outline-jp-red {
+  background: var(--jp-red);
+  color: #fff;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 0 1px 4px rgba(230,0,38,0.12);
+  transition: background .18s;
+}
+.btn-jp-red:hover, .btn-outline-jp-red:hover {
+  background: #b00018;
+  color: #fff;
+}
+.bg-jp-red {
+  background: var(--jp-red) !important;
+  color: #fff !important;
+}
+.card {
+  border-radius: 12px;
+  border: 1.5px solid var(--jp-gold);
+  box-shadow: var(--jp-shadow);
+  transition: transform .1s;
+}
+.card:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 6px 32px rgba(230,0,38,0.14);
+}
+.card-title {
+  color: var(--jp-red);
+  font-weight: 600;
+}

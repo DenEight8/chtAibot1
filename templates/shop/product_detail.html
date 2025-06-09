@@ -1,0 +1,54 @@
+{% extends "shop/base.html" %}
+
+{% block title %}
+  {{ product.name }} – Купити за {{ product.price }} ₴ | Dango
+{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ product.name }}</h1>
+
+<div class="product-detail">
+  <div class="card shadow-sm rounded-4 mb-4" style="max-width:540px;">
+    <div class="row g-0 align-items-center">
+
+      {# Зображення показуємо лише якщо воно існує #}
+      {% if product.image %}
+      <div class="col-md-5 p-2">
+        <img src="{{ product.image.url }}"
+             class="img-fluid rounded-4"
+             alt="Фото {{ product.name }}">
+      </div>
+      {% endif %}
+
+      {# Якщо немає фото – текст займає всю ширину #}
+      <div class="{% if product.image %}col-md-7{% else %}col-12{% endif %}">
+        <div class="card-body">
+          <h4 class="card-title mb-2 fw-bold">{{ product.name }}</h4>
+          <div class="mb-2 text-secondary small">{{ product.category.name }}</div>
+
+          <div class="mb-2">{{ product.description|linebreaksbr }}</div>
+
+          <div class="d-flex align-items-center mt-2">
+            <span class="badge bg-danger me-2" style="font-size:1.1rem;">
+              {{ product.price }} ₴
+            </span>
+            {% if product.in_stock %}
+              <span class="badge bg-success">В наявності</span>
+            {% else %}
+              <span class="badge bg-secondary">Немає</span>
+            {% endif %}
+          </div>
+
+          {# Єдина, валідна форма для додавання товару в кошик #}
+    <form id="add-to-cart-form" class="d-flex gap-2 align-items-center" method="post" action="{% url 'shop:cart_add' %}">
+    {% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}">
+    <input type="number" name="quantity" value="1" min="1" max="99" class="form-control" style="width:70px;">
+    <button type="submit" class="btn btn-danger btn-sm">Додати у кошик</button>
+    </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

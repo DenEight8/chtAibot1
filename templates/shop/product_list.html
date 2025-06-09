@@ -1,0 +1,20 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="d-flex flex-wrap justify-content-center">
+  {% for product in products %}
+    <div class="product-card">
+      {% if product.image %}
+        <img src="{{ product.image.url }}" alt="Фото {{ product.name }}">
+      {% else %}
+        <img src="{% static 'shop/img/placeholder.jpg' %}" alt="image">
+      {% endif %}
+      <div class="card-title">{{ product.name }}</div>
+      <div class="price">{{ product.price }} ₴</div>
+    </div>
+  {% empty %}
+    <p class="text-center w-100 py-5">Товарів у цій категорії немає.</p>
+  {% endfor %}
+</div>
+{% endblock %}

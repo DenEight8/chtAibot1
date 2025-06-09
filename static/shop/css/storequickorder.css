@@ -1,0 +1,257 @@
+/*
+ *
+ * Storequickorder plugin for Webasyst framework.
+ *
+ * @name Storequickorder
+ * @author EasyIT LLC
+ * @link http://easy-it.ru/
+ * @copyright Copyright (c) 2015, EasyIT LLC
+ * @version    1.6.4, 2016-03-17
+ *
+ */
+/* DIALOGs
+-------------------------------------------- */
+#storequickorder.dialog {
+  display: none;
+}
+#storequickorder .dialog-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  z-index: 99;
+}
+#storequickorder .dialog-window {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  opacity: 1;
+  border: 9px solid #f3f3f3;
+  overflow: hidden;
+  -moz-box-shadow: 0px 0px 70px #bbb;
+  -webkit-box-shadow: 0px 0px 70px #bbb;
+  box-shadow: 0px 0px 70px #bbb;
+  padding: 0 0 60px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  /* fix for theme profitbuy*/
+  z-index: 9999;
+  right: auto;
+  bottom: auto;
+}
+#storequickorder .dialog-window > form {
+  height: 100%;
+}
+#storequickorder.dialog.small,
+#storequickorder.dialog.large {
+  font-size: 1em !important;
+}
+#storequickorder.dialog {
+  /*&.height550px {
+      .dialog-window {
+        height: 550px;
+        min-height: 550px;
+      }
+    }
+    &.height600px {
+      .dialog-window {
+        height: 600px;
+        min-height: 600px;
+      }
+    }
+    &.height650px {
+      .dialog-window {
+        height: 650px;
+        min-height: 650px;
+      }
+    }*/
+}
+#storequickorder.dialog.small .dialog-window {
+  top: 30%;
+  left: 30%;
+  right: 30%;
+  bottom: 30%;
+  min-width: 300px;
+  min-height: 200px;
+}
+#storequickorder.dialog.large .dialog-window {
+  top: 10%;
+  left: 5%;
+  right: 5%;
+  bottom: 10%;
+  min-width: 700px;
+  min-height: 400px;
+}
+#storequickorder.dialog.width100px .dialog-window {
+  width: 100px;
+  min-width: 100px;
+}
+#storequickorder.dialog.width150px .dialog-window {
+  width: 150px;
+  min-width: 150px;
+}
+#storequickorder.dialog.width100px .dialog-window {
+  width: 200px;
+  min-width: 200px;
+}
+#storequickorder.dialog.width250px .dialog-window {
+  width: 250px;
+  min-width: 250px;
+}
+#storequickorder.dialog.width300px .dialog-window {
+  width: 300px;
+  min-width: 300px;
+}
+#storequickorder.dialog.width350px .dialog-window {
+  width: 350px;
+  min-width: 350px;
+}
+#storequickorder.dialog.width400px .dialog-window {
+  width: 400px;
+  min-width: 400px;
+}
+#storequickorder.dialog.width450px .dialog-window {
+  width: 450px;
+  min-width: 450px;
+}
+#storequickorder.dialog.width500px .dialog-window {
+  width: 500px;
+  min-width: 500px;
+}
+#storequickorder.dialog.width550px .dialog-window {
+  width: 550px;
+  min-width: 550px;
+}
+#storequickorder.dialog.width600px .dialog-window {
+  width: 600px;
+  min-width: 600px;
+}
+#storequickorder.dialog.width650px .dialog-window {
+  width: 650px;
+  min-width: 650px;
+}
+#storequickorder.dialog.height100px .dialog-window {
+  height: 100px;
+  min-height: 100px;
+}
+#storequickorder.dialog.height150px .dialog-window {
+  height: 150px;
+  min-height: 150px;
+}
+#storequickorder.dialog.height200px .dialog-window {
+  height: 200px;
+  min-height: 200px;
+}
+#storequickorder.dialog.height250px .dialog-window {
+  height: 250px;
+  min-height: 250px;
+}
+#storequickorder.dialog.height300px .dialog-window {
+  height: 300px;
+  min-height: 300px;
+}
+#storequickorder.dialog.height350px .dialog-window {
+  height: 350px;
+  min-height: 350px;
+}
+#storequickorder.dialog.height400px .dialog-window {
+  height: 400px;
+  min-height: 400px;
+}
+#storequickorder.dialog.height450px .dialog-window {
+  height: 450px;
+  min-height: 450px;
+}
+#storequickorder.dialog.height500px .dialog-window {
+  height: 500px;
+  min-height: 500px;
+}
+#storequickorder .dialog-buttons {
+  position: absolute;
+  bottom: 0;
+  height: 55px;
+  z-index: 101;
+  width: 100%;
+}
+#storequickorder .dialog-content {
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+#storequickorder .dialog-content-indent {
+  padding: 20px;
+}
+#storequickorder .dialog-buttons-gradient {
+  background: #fff;
+  padding: 10px 10px 0;
+  -moz-box-shadow: 0px -5px 5px #ffffff;
+  -webkit-box-shadow: 0px -5px 5px #ffffff;
+  box-shadow: 0px -5px 5px #ffffff;
+}
+#storequickorder .close-button {
+  float: right;
+}
+#storequickorder .block {
+  margin-top: 10px;
+}
+#storequickorder .icon16 {
+  background-repeat: no-repeat;
+  background-image: url(../../../../../wa-content/img/icon16.png);
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  text-indent: -9999px;
+  text-decoration: none !important;
+  background-size: 512px 128px;
+}
+#storequickorder .icon16.close {
+  background-position: -208px -16px;
+  position: relative;
+  margin-top: -10px;
+  margin-right: -10px;
+  cursor: pointer;
+}
+#storequickorder .errormsg {
+  margin-top: 0;
+}
+.storequickorder_pos.butpos_right,
+.storequickorder_pos.butpos_cart_right {
+  text-align: right;
+}
+.storequickorder_pos.butpos_left,
+.storequickorder_pos.butpos_cart_left {
+  text-align: left;
+}
+.storequickorder_pos.butpos_center,
+.storequickorder_pos.butpos_cart_center {
+  text-align: center;
+}
+.storequickorder-window-product_info-name {
+  display: inline-block;
+}
+.storequickorder-window-product_info-image {
+  display: inline-block;
+}
+.storequickorder-window-product_info-quantity {
+  max-width: 55px;
+  margin-top: 10px;
+}
+/* other */
+#dsvoverview .storequickorder-button {
+  display: block;
+  /* temp */
+}
+/* comfortbuy */
+ul.products-slider .stocks {
+  /*
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  */
+}

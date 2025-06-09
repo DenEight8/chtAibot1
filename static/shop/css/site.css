@@ -1,0 +1,28 @@
+/* ===== GLOBAL  ===== */
+:root{
+  --brand:#0d6efd;
+  --brand-dark:#0b5ed7;
+  --text:#212529;
+  --bg:#fff;
+  --card:#fff;
+  --card-hover:#f8f9fa;
+}
+[data-theme="dark"]{
+  --brand:#3d8bfd;
+  --brand-dark:#1e6be3;
+  --text:#e9ecef;
+  --bg:#212529;
+  --card:#2b3035;
+  --card-hover:#343a40;
+}
+body{background:var(--bg);color:var(--text);transition:.3s;}
+.card{border:none;border-radius:14px;background:var(--card);transition:.25s;box-shadow:0 4px 14px rgba(0,0,0,.06);}
+.card:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,.08);background:var(--card-hover);}
+.btn-brand{background:var(--brand);border:none;color:#fff;font-weight:600;}
+.btn-brand:hover{background:var(--brand-dark);}
+.badge-hot{background:#dc3545;}
+/* grid для product-карток */
+.products-grid{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));}
+.card-img-top{height:180px;object-fit:contain;padding:1rem;}
+/* SEARCH */
+#product-search{max-width:380px;}
