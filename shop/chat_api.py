@@ -174,7 +174,7 @@ def _call_gpt(self, query: str) -> str:
         # Гарантуємо повернення рядка згідно з анотацією  
         return resp.choices[0].message.content.strip()
     except Exception as exc:  # noqa: BLE001  
-        # Логуємо трейcбек та текст помилки        logger.exception("OpenAI error: %s", exc)  
+        # Логуємо трейсбек та текст помилки        logger.exception("OpenAI error: %s", exc)  
         # Повертаємо безпечне повідомлення для користувача  
         return "⚠️ Вибачте, не вдалося отримати відповідь."
 
