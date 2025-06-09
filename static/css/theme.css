@@ -1,0 +1,122 @@
+/*
+ * Theme stylesheet refreshing visual style.
+ * Contains CSS variables, utility helpers and component overrides.
+ */
+
+/* ---------- CSS variables for easy re-skinning ---------- */
+:root {
+  --primary: #1E88E5;               /* main brand color */
+  --primary-dark: #1565C0;          /* darker shade for hovers */
+  --background: #F5F7FA;            /* page background */
+  --text-color: #212529;            /* default text */
+  --border-radius: 0.5rem;          /* consistent rounding */
+  --body-font: 'Inter', 'Noto Sans JP', sans-serif;
+
+  /* map Bootstrap's CSS variables to our palette */
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 30,136,229;
+  --bs-body-bg: var(--background);
+  --bs-body-color: var(--text-color);
+  --bs-body-font-family: var(--body-font);
+}
+
+/* Dark mode using prefers-color-scheme for subtle theming */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --text-color: #e3e3e3;
+
+    --bs-body-bg: var(--background);
+    --bs-body-color: var(--text-color);
+  }
+}
+
+/* ---------- Base element styling ---------- */
+body {
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+}
+
+/* Maintain support for body.modern-body used in templates */
+.modern-body {
+  background: var(--bs-body-bg);
+  min-height: 100vh;
+}
+
+/* ---------- Utility classes ---------- */
+.bg-primary-faint { background-color: rgba(var(--bs-primary-rgb), 0.1) !important; }
+.text-dark-primary { color: var(--primary-dark) !important; }
+.rounded-soft { border-radius: var(--border-radius) !important; }
+
+/* ---------- Component overrides ---------- */
+.navbar-modern {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link:focus {
+  color: var(--primary-dark);
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+/* Product card used on listing pages */
+.product-card {
+  width: 170px;
+  min-width: 140px;
+  margin: 10px;
+  padding: 12px 12px 16px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  background: #fff;
+  transition: box-shadow .25s, transform .25s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.product-card:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  transform: translateY(-4px);
+}
+.product-card img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.product-card .card-title {
+  font-size: 15px;
+  font-weight: 600;
+  min-height: 32px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+.product-card .price {
+  font-size: 15px;
+  color: var(--primary-dark);
+  font-weight: bold;
+  margin-top: 3px;
+  margin-bottom: 0;
+}
