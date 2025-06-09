@@ -22,7 +22,7 @@ class Product(models.Model):
     rating = models.PositiveSmallIntegerField(default=0)   # 0-5
     in_stock = models.BooleanField(default=True)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         """Return the canonical product URL."""
         return reverse("shop:product_detail", args=[self.slug])
 
