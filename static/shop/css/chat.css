@@ -1,48 +1,81 @@
-#dango-chat-toggle {
-    transition: box-shadow 0.2s;
+.chatbox {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 350px;
+    min-width: 240px;
+    max-width: 90vw;
+    height: 340px;
+    min-height: 180px;
+    max-height: 80vh;
+    background: #ffffffcc;
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    border: 2px solid #ffd500;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(40px) scale(0.97);
+    transition: all .35s cubic-bezier(.6,0,.2,1);
+    z-index: 1000;
 }
-#dango-chat-toggle:hover {
-    box-shadow: 0 8px 16px #e6001266;
+.chat-header {
+    background: #ffd500;
+    color: #222;
+    font-weight: bold;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: move;
+    user-select: none;
 }
-#dango-chat-widget {
-    animation: chatOpen 0.23s;
-}
-@keyframes chatOpen {
-    from {transform: translateY(30px) scale(0.92); opacity:0;}
-    to {transform: none; opacity:1;}
-}
-#dango-chat-messages {
+.chat-messages {
+    height: 190px;
     overflow-y: auto;
-    min-height: 120px;
-    max-height: 340px;
+    padding: 10px;
+    font-size: 14px;
+    background: #fcfcfc;
 }
-.dango-message {
-    background: #f6f6f6;
-    border-radius: 16px;
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    display: inline-block;
-    max-width: 90%;
+.chat-form {
+    padding: 12px 10px 10px 10px;
+    background: #fff;
+    border-top: 1px solid #f5d500;
 }
-.dango-message.bot {
-    background: #e9f2ff;
-    color: #14467a;
-    margin-right: auto;
+.chat-fab {
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #ffd500;
+    border: none;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    cursor: pointer;
+    font-size: 2rem;
+    z-index: 999;
 }
-.dango-message.user {
-    background: #e60012;
-    color: #fff;
-    margin-left: auto;
-    text-align: right;
+.chat-fab:hover {
+    box-shadow: 0 6px 26px rgba(0,0,0,0.25);
+}
+.chat-resizer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 16px;
+    height: 16px;
+    cursor: se-resize;
 }
 @media (max-width: 480px) {
-    #dango-chat-widget {
+    .chatbox {
         right: 4vw !important;
         bottom: 4vw !important;
         width: 96vw !important;
         min-width: 0;
     }
-    #dango-chat-toggle {
+    .chat-fab {
         right: 4vw !important;
         bottom: 4vw !important;
     }
