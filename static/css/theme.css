@@ -1,26 +1,31 @@
 /*
- * Theme stylesheet refreshing visual style.
- * Contains CSS variables, utility helpers and component overrides.
+ * Theme stylesheet for the shop front-end.
+ * Provides CSS variables, utility classes and component overrides
+ * tuned to our branding colors.
  */
 
-/* ---------- CSS variables for easy re-skinning ---------- */
+/* --------------------------------------------------
+   Root CSS variables allow quick re-skinning
+   -------------------------------------------------- */
 :root {
-  --primary: #1E88E5;               /* main brand color */
-  --primary-dark: #1565C0;          /* darker shade for hovers */
-  --background: #F5F7FA;            /* page background */
-  --text-color: #212529;            /* default text */
-  --border-radius: 0.5rem;          /* consistent rounding */
-  --body-font: 'Inter', 'Noto Sans JP', sans-serif;
+  --primary: #1E88E5;       /* main brand blue */
+  --primary-dark: #1565C0;  /* darker accent for hover/focus */
+  --background: #F5F7FA;    /* default page background */
+  --text-color: #212529;    /* default text color */
+  --radius: 0.5rem;         /* consistent rounding */
+  --font-family: 'Inter', sans-serif;
 
-  /* map Bootstrap's CSS variables to our palette */
-  --bs-primary: var(--primary);
-  --bs-primary-rgb: 30,136,229;
+  /* Map important Bootstrap variables to the palette */
   --bs-body-bg: var(--background);
   --bs-body-color: var(--text-color);
-  --bs-body-font-family: var(--body-font);
+  --bs-border-radius: var(--radius);
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 30,136,229;
 }
 
-/* Dark mode using prefers-color-scheme for subtle theming */
+/* --------------------------------------------------
+   Dark mode tweaks using prefers-color-scheme
+   -------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #121212;
@@ -31,25 +36,31 @@
   }
 }
 
-/* ---------- Base element styling ---------- */
+/* --------------------------------------------------
+   Base element styling
+   -------------------------------------------------- */
 body {
   background: var(--bs-body-bg);
   color: var(--bs-body-color);
-  font-family: var(--bs-body-font-family);
+  font-family: var(--font-family);
 }
 
-/* Maintain support for body.modern-body used in templates */
+/* keep body.modern-body used by templates */
 .modern-body {
   background: var(--bs-body-bg);
   min-height: 100vh;
 }
 
-/* ---------- Utility classes ---------- */
-.bg-primary-faint { background-color: rgba(var(--bs-primary-rgb), 0.1) !important; }
+/* --------------------------------------------------
+   Utility helper classes
+   -------------------------------------------------- */
+.bg-primary-faint { background-color: rgba(var(--bs-primary-rgb), .1) !important; }
 .text-dark-primary { color: var(--primary-dark) !important; }
-.rounded-soft { border-radius: var(--border-radius) !important; }
+.rounded-soft { border-radius: var(--radius) !important; }
 
-/* ---------- Component overrides ---------- */
+/* --------------------------------------------------
+   Component overrides for a lighter modern style
+   -------------------------------------------------- */
 .navbar-modern {
   background: rgba(255,255,255,0.85);
   backdrop-filter: blur(8px);
@@ -62,9 +73,7 @@ body {
   color: var(--primary-dark);
 }
 
-.navbar-brand {
-  font-weight: 600;
-}
+.navbar-brand { font-weight: 600; }
 
 .btn-primary {
   background-color: var(--primary);
@@ -78,17 +87,17 @@ body {
 
 .card {
   border: none;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
 }
 
-/* Product card used on listing pages */
+/* product card component on listing pages */
 .product-card {
   width: 170px;
   min-width: 140px;
   margin: 10px;
   padding: 12px 12px 16px;
-  border-radius: var(--border-radius);
+  border-radius: var(--radius);
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   background: #fff;
   transition: box-shadow .25s, transform .25s;
