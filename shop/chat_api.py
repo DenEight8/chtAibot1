@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 import os
 import re
 from datetime import timedelta
@@ -11,7 +10,7 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.views import View
 
-from shop.models import Category, FAQ, Product
+from shop.models import Category, Product
 
 # ---------- CONSTANTS -------------------------------------------------  
 MAX_MSG_LEN: int = 800
@@ -140,56 +139,6 @@ def _mark_gpt(sess) -> None:
         sess["last_gpt"] = timezone.now().isoformat()
 
 
-def _handle_faq_db(msg: str) -> Optional[str]:
-    """Manage FAQ entries via OpenAI if the message requests it."""
-    if not client:
-        return None
-
-    system_prompt = (
-        "You help manage an FAQ database for an online store. "
-        "Detect if the user wants to list FAQs, add a new entry or delete one. "
-        "Respond only with JSON like {\"action\": \"list\"} or "
-        "{\"action\": \"add\", \"question\": \"...\", \"answer\": \"...\"} "
-        "or {\"action\": \"delete\", \"question\": \"...\"}. "
-        "If the request is unrelated, return {\"action\": \"none\"}."
-    )
-
-    try:
-        resp = client.chat.completions.create(
-            model=OPENAI_MODEL,
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user", "content": msg},
-            ],
-            temperature=0,
-            max_tokens=120,
-        )
-        data = json.loads(resp.choices[0].message.content)
-    except Exception:
-        return None
-
-    action = data.get("action")
-    if action == "add":
-        q = data.get("question")
-        a = data.get("answer")
-        if not (q and a):
-            return "❌ Некоректні дані для додавання."
-        FAQ.objects.get_or_create(question=q, defaults={"answer": a})
-        return f"✅ Додано питання: {q}"
-    if action == "delete":
-        q = data.get("question")
-        if not q:
-            return "❌ Не вказано питання для видалення."
-        deleted, _ = FAQ.objects.filter(question__iexact=q).delete()
-        return "🗑️ Видалено." if deleted else "❌ Питання не знайдено."
-    if action == "list":
-        faqs = FAQ.objects.all().values_list("question", "answer")
-        if not faqs:
-            return "ℹ️ Питання відсутні."
-        return "\n".join(f"• {q} — {a}" for q, a in faqs)
-    return None
-
-
 def _faq_or_greeting(msg: str) -> Optional[str]:
     lmsg = msg.lower()
     greetings = ["привіт", "здоров", "добрий", "hello", "hi", "вітаю"]
@@ -265,13 +214,7 @@ class ChatBotAPIView(APIView):  # noqa: D101
         lmsg = user_msg.lower()
         pend = sess.get("await") if hasattr(sess, "get") else None
 
-        # ---- AI FAQ management --------------------------------------
-        if txt := _handle_faq_db(user_msg):
-            sess.pop("await", None)
-            _mark_gpt(sess)
-            return JsonResponse({"answer": txt, "type": "info"})
-
-        # ---- FAQ / greeting -------------------------------------------
+        # ---- FAQ / greeting -------------------------------------------  
         if txt := _faq_or_greeting(user_msg):
             sess.pop("await", None)
             return JsonResponse({"answer": txt, "type": "info"})
