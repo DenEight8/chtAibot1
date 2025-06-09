@@ -1,6 +1,8 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 
+"""Handles WebSocket chat messages and currently echoes user input."""
+
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         await self.accept()
