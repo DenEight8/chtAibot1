@@ -1,0 +1,47 @@
+/* Link this file instead of theme.css to switch to the alt brand theme */
+:root {
+  --primary: #FF5722;
+  --secondary: #546E7A;
+  --background: #F9F9F9;
+  --text-color: #212121;
+  --radius: 0.5rem;
+  --font-family: 'Inter', sans-serif;
+
+  --bs-body-bg: var(--background);
+  --bs-body-color: var(--text-color);
+  --bs-border-radius: var(--radius);
+  --bs-primary: var(--primary);
+  --bs-primary-rgb: 255,87,34;
+  --bs-secondary: var(--secondary);
+  --bs-secondary-rgb: 84,110,122;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #121212;
+    --text-color: #F9F9F9;
+
+    --bs-body-bg: var(--background);
+    --bs-body-color: var(--text-color);
+  }
+}
+
+body {
+  background: var(--bs-body-bg);
+  color: var(--bs-body-color);
+  font-family: var(--font-family);
+}
+
+.modern-body {
+  background: var(--bs-body-bg);
+  min-height: 100vh;
+}
+
+.bg-brand {
+  background-color: var(--primary) !important;
+  color: #fff !important;
+}
+
+.text-muted-secondary {
+  color: var(--secondary) !important;
+}
