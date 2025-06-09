@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatInput    = document.getElementById('chat-input');
     const chatMessages = document.getElementById('chat-messages');
     if (!chatbox || !fab || !closeBtn || !chatForm || !chatInput || !chatMessages) return;
-    const header       = chatbox.querySelector('.chat-header');
-    const resizer      = chatbox.querySelector('.chat-resizer');
 
     /* ── show / hide ───────────────────────────────────────── */
     fab.addEventListener('click', () => {
@@ -21,50 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chatbox.style.pointerEvents = 'none';
         fab.style.display = '';
     });
-
-    /* ── dragging ─────────────────────────────────────────── */
-    if (header) {
-        header.addEventListener('pointerdown', e => {
-            if (e.button !== 0) return;
-            e.preventDefault();
-            const rect = chatbox.getBoundingClientRect();
-            const shiftX = e.clientX - rect.left;
-            const shiftY = e.clientY - rect.top;
-            const onMove = ev => {
-                chatbox.style.left = ev.clientX - shiftX + 'px';
-                chatbox.style.top = ev.clientY - shiftY + 'px';
-                chatbox.style.right = 'auto';
-                chatbox.style.bottom = 'auto';
-            };
-            const onUp = () => {
-                document.removeEventListener('pointermove', onMove);
-            };
-            document.addEventListener('pointermove', onMove);
-            document.addEventListener('pointerup', onUp, { once: true });
-        });
-    }
-
-    /* ── resizing ─────────────────────────────────────────── */
-    if (resizer) {
-        resizer.addEventListener('pointerdown', e => {
-            e.preventDefault();
-            const startW = chatbox.offsetWidth;
-            const startH = chatbox.offsetHeight;
-            const startX = e.clientX;
-            const startY = e.clientY;
-            const onMove = ev => {
-                const newW = Math.max(240, startW + ev.clientX - startX);
-                const newH = Math.max(180, startH + ev.clientY - startY);
-                chatbox.style.width = newW + 'px';
-                chatbox.style.height = newH + 'px';
-            };
-            const onUp = () => {
-                document.removeEventListener('pointermove', onMove);
-            };
-            document.addEventListener('pointermove', onMove);
-            document.addEventListener('pointerup', onUp, { once: true });
-        });
-    }
 
     /* ── local history ────────────────────────────────────── */
     let history = [];
