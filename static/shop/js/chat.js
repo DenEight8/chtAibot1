@@ -1,4 +1,3 @@
-// static/shop/js/chat.js
 document.addEventListener('DOMContentLoaded', () => {
     const chatbox      = document.getElementById('chatbox');
     const fab          = document.getElementById('chat-fab');
@@ -8,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatMessages = document.getElementById('chat-messages');
     if (!chatbox || !fab || !closeBtn || !chatForm || !chatInput || !chatMessages) return;
 
-    /* ── show / hide ───────────────────────────────────────── */
+    // show / hide
     fab.addEventListener('click', () => {
         chatbox.style.opacity = '1';
         chatbox.style.pointerEvents = 'auto';
@@ -20,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fab.style.display = '';
     });
 
-    /* ── local history ────────────────────────────────────── */
+    // local history
     let history = [];
     try {
         const stored = localStorage.getItem('dango_chat_history');
@@ -38,8 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             localStorage.setItem('dango_chat_history', JSON.stringify(history));
         } catch (e) {
-            // Можна показати користувачу повідомлення, або записати у консоль
-            // alert('Помилка збереження історії чату.');
             console.warn('Помилка збереження історії чату.');
         }
     };
@@ -53,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     render();
 
-    /* ── send ─────────────────────────────────────────────── */
+    // send
     chatForm.addEventListener('submit', ev => {
         ev.preventDefault();
         const msg = chatInput.value.trim();
@@ -96,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.value = '';
     });
 
-    /* ── clear history (RMB) ──────────────────────────────── */
+    // clear history (RMB)
     chatMessages.addEventListener('contextmenu', e => {
         e.preventDefault();
         if (confirm('Очистити історію чату?')) {
@@ -105,9 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
             render();
         }
     });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
+    // DRAG & RESIZE функціонал
     const container =
         document.getElementById('chatbot-container') ||
         document.getElementById('chatbox');
@@ -132,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.bottom = '1rem';
     }
 
+    // додати handle для resize
     const handle = document.createElement('div');
     handle.className = 'chatbot-resize-handle';
     container.appendChild(handle);
