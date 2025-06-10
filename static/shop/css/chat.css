@@ -92,4 +92,7 @@
     right: 0;
     bottom: 0;
     cursor: se-resize;
+    border-right: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    box-sizing: border-box;
 }
