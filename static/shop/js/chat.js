@@ -106,3 +106,90 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const container = document.getElementById('chatbot-container');
+    const header = container?.querySelector('.chatbot-header');
+    if (!container || !header) return;
+
+    container.style.position = 'fixed';
+    const pos = JSON.parse(localStorage.getItem('chatbotPos') || 'null');
+    const size = JSON.parse(localStorage.getItem('chatbotSize') || 'null');
+    if (size) {
+        container.style.width = size.width + 'px';
+        container.style.height = size.height + 'px';
+    }
+    if (pos) {
+        container.style.left = pos.left + 'px';
+        container.style.top = pos.top + 'px';
+    } else {
+        container.style.right = '1rem';
+        container.style.bottom = '1rem';
+    }
+
+    const handle = document.createElement('div');
+    handle.className = 'chatbot-resize-handle';
+    container.appendChild(handle);
+
+    let drag = false, offsetX = 0, offsetY = 0;
+    header.addEventListener('mousedown', e => {
+        drag = true;
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+        document.body.style.userSelect = 'none';
+    });
+
+    let resize = false, startX = 0, startY = 0, startW = 0, startH = 0;
+    handle.addEventListener('mousedown', e => {
+        resize = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        startW = container.offsetWidth;
+        startH = container.offsetHeight;
+        document.body.style.userSelect = 'none';
+        e.stopPropagation();
+    });
+
+    const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
+    const savePos = () => localStorage.setItem('chatbotPos', JSON.stringify({
+        left: container.offsetLeft,
+        top: container.offsetTop
+    }));
+    const saveSize = () => localStorage.setItem('chatbotSize', JSON.stringify({
+        width: container.offsetWidth,
+        height: container.offsetHeight
+    }));
+
+    document.addEventListener('mousemove', e => {
+        if (drag) {
+            const vw = document.documentElement.clientWidth;
+            const vh = document.documentElement.clientHeight;
+            let l = e.clientX - offsetX;
+            let t = e.clientY - offsetY;
+            l = clamp(l, 0, vw - container.offsetWidth);
+            t = clamp(t, 0, vh - container.offsetHeight);
+            container.style.left = l + 'px';
+            container.style.top = t + 'px';
+        } else if (resize) {
+            let w = startW + e.clientX - startX;
+            let h = startH + e.clientY - startY;
+            w = clamp(w, 320, 560);
+            h = clamp(h, 260, 720);
+            container.style.width = w + 'px';
+            container.style.height = h + 'px';
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (drag) {
+            drag = false;
+            document.body.style.userSelect = '';
+            savePos();
+        }
+        if (resize) {
+            resize = false;
+            document.body.style.userSelect = '';
+            saveSize();
+        }
+    });
+});

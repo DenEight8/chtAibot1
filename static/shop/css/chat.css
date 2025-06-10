@@ -1,5 +1,10 @@
 #chatbot-container {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
     width: clamp(320px, 90vw, 560px);
+    min-height: 260px;
+    max-height: 720px;
     background: #FFF;
     border-radius: 12px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -78,4 +83,13 @@
     background: #FF9800;
     border-color: #FF9800;
     color: #263238;
+}
+
+#chatbot-container .chatbot-resize-handle {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
 }
