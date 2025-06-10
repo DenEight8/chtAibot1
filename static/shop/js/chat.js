@@ -147,21 +147,65 @@ document.addEventListener('DOMContentLoaded', () => {
         if (t) startDrag(t.clientX, t.clientY);
     }, { passive: true });
 
-    let resize = false, startX = 0, startY = 0, startW = 0, startH = 0;
-    const startResize = (x, y) => {
-        resize = true;
+    let resize = null;
+    let startX = 0, startY = 0, startW = 0, startH = 0, startL = 0, startT = 0;
+    const startResize = (x, y, edges) => {
+        resize = edges;
         startX = x;
         startY = y;
         startW = container.offsetWidth;
         startH = container.offsetHeight;
+        startL = container.offsetLeft;
+        startT = container.offsetTop;
         document.body.style.userSelect = 'none';
     };
-    handle.addEventListener('mousedown', e => { startResize(e.clientX, e.clientY); e.stopPropagation(); });
+    handle.addEventListener('mousedown', e => {
+        startResize(e.clientX, e.clientY, { right: true, bottom: true });
+        e.stopPropagation();
+    });
     handle.addEventListener('touchstart', e => {
         const t = e.touches[0];
-        if (t) startResize(t.clientX, t.clientY);
+        if (t) startResize(t.clientX, t.clientY, { right: true, bottom: true });
         e.stopPropagation();
     }, { passive: true });
+
+    const EDGE_SIZE = 8;
+    const getEdges = (x, y) => {
+        const rect = container.getBoundingClientRect();
+        const left   = x - rect.left <= EDGE_SIZE;
+        const right  = rect.right - x <= EDGE_SIZE;
+        const top    = y - rect.top <= EDGE_SIZE;
+        const bottom = rect.bottom - y <= EDGE_SIZE;
+        if (left || right || top || bottom) return { left, right, top, bottom };
+        return null;
+    };
+    const cursorFor = ed =>
+        ed.left && ed.top || ed.right && ed.bottom ? 'nwse-resize' :
+        ed.right && ed.top || ed.left && ed.bottom ? 'nesw-resize' :
+        ed.left || ed.right ? 'ew-resize' :
+        'ns-resize';
+    container.addEventListener('mousedown', e => {
+        const ed = getEdges(e.clientX, e.clientY);
+        if (ed) {
+            startResize(e.clientX, e.clientY, ed);
+            e.preventDefault();
+        }
+    });
+    container.addEventListener('touchstart', e => {
+        const t = e.touches[0];
+        if (t) {
+            const ed = getEdges(t.clientX, t.clientY);
+            if (ed) {
+                startResize(t.clientX, t.clientY, ed);
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
+    container.addEventListener('mousemove', e => {
+        if (resize) return;
+        const ed = getEdges(e.clientX, e.clientY);
+        container.style.cursor = ed ? cursorFor(ed) : '';
+    });
 
     const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
     const savePos = () => localStorage.setItem('chatbotPos', JSON.stringify({
@@ -184,12 +228,29 @@ document.addEventListener('DOMContentLoaded', () => {
             container.style.left = l + 'px';
             container.style.top = t + 'px';
         } else if (resize) {
-            let w = startW + x - startX;
-            let h = startH + y - startY;
+            let w = startW;
+            let h = startH;
+            if (resize.right) w += x - startX;
+            if (resize.bottom) h += y - startY;
+            if (resize.left) w -= x - startX;
+            if (resize.top) h -= y - startY;
+
             w = clamp(w, 320, 560);
             h = clamp(h, 260, 720);
-            container.style.width = w + 'px';
+
+            let l = startL;
+            let t = startT;
+            if (resize.left) l = startL + (startW - w);
+            if (resize.top)  t = startT + (startH - h);
+            const vw = document.documentElement.clientWidth;
+            const vh = document.documentElement.clientHeight;
+            l = clamp(l, 0, vw - w);
+            t = clamp(t, 0, vh - h);
+
+            container.style.width  = w + 'px';
             container.style.height = h + 'px';
+            container.style.left   = l + 'px';
+            container.style.top    = t + 'px';
         }
     };
 
@@ -206,10 +267,11 @@ document.addEventListener('DOMContentLoaded', () => {
             savePos();
         }
         if (resize) {
-            resize = false;
+            resize = null;
             document.body.style.userSelect = '';
             saveSize();
         }
+        container.style.cursor = '';
     };
     document.addEventListener('mouseup', endAction);
     document.addEventListener('touchend', endAction);
