@@ -134,23 +134,34 @@ document.addEventListener('DOMContentLoaded', () => {
     container.appendChild(handle);
 
     let drag = false, offsetX = 0, offsetY = 0;
-    header.addEventListener('mousedown', e => {
+    const startDrag = (x, y) => {
         drag = true;
-        offsetX = e.clientX - container.offsetLeft;
-        offsetY = e.clientY - container.offsetTop;
+        offsetX = x - container.offsetLeft;
+        offsetY = y - container.offsetTop;
         document.body.style.userSelect = 'none';
-    });
+    };
+
+    header.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+    header.addEventListener('touchstart', e => {
+        const t = e.touches[0];
+        if (t) startDrag(t.clientX, t.clientY);
+    }, { passive: true });
 
     let resize = false, startX = 0, startY = 0, startW = 0, startH = 0;
-    handle.addEventListener('mousedown', e => {
+    const startResize = (x, y) => {
         resize = true;
-        startX = e.clientX;
-        startY = e.clientY;
+        startX = x;
+        startY = y;
         startW = container.offsetWidth;
         startH = container.offsetHeight;
         document.body.style.userSelect = 'none';
+    };
+    handle.addEventListener('mousedown', e => { startResize(e.clientX, e.clientY); e.stopPropagation(); });
+    handle.addEventListener('touchstart', e => {
+        const t = e.touches[0];
+        if (t) startResize(t.clientX, t.clientY);
         e.stopPropagation();
-    });
+    }, { passive: true });
 
     const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
     const savePos = () => localStorage.setItem('chatbotPos', JSON.stringify({
@@ -162,27 +173,33 @@ document.addEventListener('DOMContentLoaded', () => {
         height: container.offsetHeight
     }));
 
-    document.addEventListener('mousemove', e => {
+    const handleMove = (x, y) => {
         if (drag) {
             const vw = document.documentElement.clientWidth;
             const vh = document.documentElement.clientHeight;
-            let l = e.clientX - offsetX;
-            let t = e.clientY - offsetY;
+            let l = x - offsetX;
+            let t = y - offsetY;
             l = clamp(l, 0, vw - container.offsetWidth);
             t = clamp(t, 0, vh - container.offsetHeight);
             container.style.left = l + 'px';
             container.style.top = t + 'px';
         } else if (resize) {
-            let w = startW + e.clientX - startX;
-            let h = startH + e.clientY - startY;
+            let w = startW + x - startX;
+            let h = startH + y - startY;
             w = clamp(w, 320, 560);
             h = clamp(h, 260, 720);
             container.style.width = w + 'px';
             container.style.height = h + 'px';
         }
-    });
+    };
 
-    document.addEventListener('mouseup', () => {
+    document.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
+    document.addEventListener('touchmove', e => {
+        const t = e.touches[0];
+        if (t) handleMove(t.clientX, t.clientY);
+    }, { passive: false });
+
+    const endAction = () => {
         if (drag) {
             drag = false;
             document.body.style.userSelect = '';
@@ -193,5 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.userSelect = '';
             saveSize();
         }
-    });
+    };
+    document.addEventListener('mouseup', endAction);
+    document.addEventListener('touchend', endAction);
 });
