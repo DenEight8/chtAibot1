@@ -42,4 +42,3 @@ class ApiSearchTests(TestCase):
             data[0],
             {"label": self.product.name, "url": self.product.get_absolute_url()},
         )
-

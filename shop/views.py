@@ -4,7 +4,6 @@ import json
 from decimal import Decimal
 from typing import Any
 
-from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.http import (
@@ -14,14 +13,12 @@ from django.http import (
     JsonResponse,
 )
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
 # !!! залишились лише потрібні форми
 from .forms import QuickOrderForm, RegistrationForm
-from .models import Cart, CartItem, Category, FAQ, Order, Product
-from .chat_api import ChatBotAPIView
+from .models import Cart, CartItem, Category, Order, Product
 
 
 # ───────────────────────── cart helpers ─────────────────────────────

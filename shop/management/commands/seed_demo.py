@@ -3,6 +3,7 @@ from django.core.files import File
 from django.core.management.base import BaseCommand
 from shop.models import Category, Product
 
+
 class Command(BaseCommand):
     help = "Заповнює демо-категорію й товари"
 
