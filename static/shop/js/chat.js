@@ -108,9 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('chatbot-container');
-    const header = container?.querySelector('.chatbot-header');
-    if (!container || !header) return;
+    const container =
+        document.getElementById('chatbot-container') ||
+        document.getElementById('chatbox');
+    if (!container) return;
+
+    const header = container.querySelector('.chatbot-header') ||
+        container.firstElementChild;
+    if (!header) return;
 
     container.style.position = 'fixed';
     const pos = JSON.parse(localStorage.getItem('chatbotPos') || 'null');
