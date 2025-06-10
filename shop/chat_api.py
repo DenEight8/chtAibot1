@@ -11,7 +11,9 @@ from django.utils import timezone
 from django.utils.text import slugify
 from django.views import View
 
-from shop.models import Category, Product
+from django.db import connection
+
+from shop.models import Category, Product, Order
 
 logger = logging.getLogger(__name__)
 
@@ -123,6 +125,62 @@ def _find_product(name_part: str) -> Optional[Product]:
     )
 
 
+ALLOWED_TABLES = {
+    'product': Product,
+    'order': Order,
+}
+
+
+def _run_safe_sql(query: str) -> Optional[List[dict]]:
+    """Validate and execute a read-only SQL query."""
+    cleaned = query.strip().rstrip(';')
+    if not re.match(r'^select\s', cleaned, re.I):
+        return None
+
+    tables = re.findall(r'(?:from|join)\s+([a-zA-Z_][a-zA-Z0-9_]*)', cleaned, re.I)
+    allowed_names = {m._meta.db_table.lower() for m in ALLOWED_TABLES.values()}
+    allowed_names.update(ALLOWED_TABLES.keys())
+    for tbl in tables:
+        if tbl.lower() not in allowed_names:
+            return None
+
+    for name, model in ALLOWED_TABLES.items():
+        cleaned = re.sub(rf'\b{name}\b', model._meta.db_table, cleaned, flags=re.I)
+
+    with connection.cursor() as cur:
+        cur.execute(cleaned)
+        columns = [c[0] for c in cur.description]
+        return [dict(zip(columns, row)) for row in cur.fetchall()]
+
+
+def _table_to_md(rows: List[dict]) -> str:
+    """Convert list of dict rows to markdown table."""
+    if not rows:
+        return '_(no results)_'  # noqa: WPS323
+    headers = list(rows[0].keys())
+    lines = [
+        '| ' + ' | '.join(headers) + ' |',
+        '| ' + ' | '.join('-' * len(h) for h in headers) + ' |',
+    ]
+    for row in rows:
+        lines.append('| ' + ' | '.join(str(row[h]) for h in headers) + ' |')
+    return '\n'.join(lines)
+
+
+def _natural_query(msg: str) -> Optional[List[dict]]:
+    """Very naive text to ORM converter."""
+    if 'order' in msg or 'замовл' in msg:
+        qs = Order.objects.all().values('id', 'total_price', 'created').order_by('-created')[:5]
+        return list(qs)
+
+    if 'product' in msg or 'товар' in msg:
+        qs = Product.objects.all()
+        if m := re.search(r'(?:до|under)\s*(\d+)', msg):
+            qs = qs.filter(price__lte=int(m.group(1)))
+        return list(qs.values('name', 'price')[:10])
+    return None
+
+
 def _rate_limited(sess) -> bool:
     stamp = sess.get("last_gpt") if hasattr(sess, "get") else None
     if not stamp:
@@ -218,6 +276,12 @@ class ChatBotAPIView(APIView):  # noqa: D101
         lmsg = user_msg.lower()
         pend = sess.get("await") if hasattr(sess, "get") else None
 
+        if user_msg.lstrip().lower().startswith('#sql:'):
+            rows = _run_safe_sql(user_msg.split(':', 1)[1])
+            if rows is None:
+                return JsonResponse({"answer": "❌ Некоректний SQL-запит.", "type": "error"})
+            return JsonResponse({"answer": _table_to_md(rows), "type": "info"})
+
         # ---- FAQ / greeting -------------------------------------------
         if txt := _faq_or_greeting(user_msg):
             sess.pop("await", None)
@@ -255,6 +319,9 @@ class ChatBotAPIView(APIView):  # noqa: D101
         if LIST_PAT.search(lmsg):
             sess["await"] = "category"
             return JsonResponse({"answer": "🗂️ Яку категорію товарів показати?", "type": "info"})
+
+        if rows := _natural_query(lmsg):
+            return JsonResponse({"answer": _table_to_md(rows), "type": "info"})
 
             # ---- делегуємо GPT-4o ----------------------------------------
         gpt_answer = _call_gpt(self, user_msg)

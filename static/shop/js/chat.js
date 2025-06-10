@@ -128,86 +128,8 @@ document.addEventListener('DOMContentLoaded', () => {
         container.style.bottom = '1rem';
     }
 
-    // додати handle для resize
-    const handle = document.createElement('div');
-    handle.className = 'chatbot-resize-handle';
-    container.appendChild(handle);
-
     let drag = false, offsetX = 0, offsetY = 0;
-    const startDrag = (x, y) => {
-        drag = true;
-        offsetX = x - container.offsetLeft;
-        offsetY = y - container.offsetTop;
-        document.body.style.userSelect = 'none';
-    };
 
-    header.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
-    header.addEventListener('touchstart', e => {
-        const t = e.touches[0];
-        if (t) startDrag(t.clientX, t.clientY);
-    }, { passive: true });
-
-    let resize = null;
-    let startX = 0, startY = 0, startW = 0, startH = 0, startL = 0, startT = 0;
-    const startResize = (x, y, edges) => {
-        resize = edges;
-        startX = x;
-        startY = y;
-        startW = container.offsetWidth;
-        startH = container.offsetHeight;
-        startL = container.offsetLeft;
-        startT = container.offsetTop;
-        document.body.style.userSelect = 'none';
-    };
-    handle.addEventListener('mousedown', e => {
-        startResize(e.clientX, e.clientY, { right: true, bottom: true });
-        e.stopPropagation();
-    });
-    handle.addEventListener('touchstart', e => {
-        const t = e.touches[0];
-        if (t) startResize(t.clientX, t.clientY, { right: true, bottom: true });
-        e.stopPropagation();
-    }, { passive: true });
-
-    const EDGE_SIZE = 8;
-    const getEdges = (x, y) => {
-        const rect = container.getBoundingClientRect();
-        const left   = x - rect.left <= EDGE_SIZE;
-        const right  = rect.right - x <= EDGE_SIZE;
-        const top    = y - rect.top <= EDGE_SIZE;
-        const bottom = rect.bottom - y <= EDGE_SIZE;
-        if (left || right || top || bottom) return { left, right, top, bottom };
-        return null;
-    };
-    const cursorFor = ed =>
-        ed.left && ed.top || ed.right && ed.bottom ? 'nwse-resize' :
-        ed.right && ed.top || ed.left && ed.bottom ? 'nesw-resize' :
-        ed.left || ed.right ? 'ew-resize' :
-        'ns-resize';
-    container.addEventListener('mousedown', e => {
-        const ed = getEdges(e.clientX, e.clientY);
-        if (ed) {
-            startResize(e.clientX, e.clientY, ed);
-            e.preventDefault();
-        }
-    });
-    container.addEventListener('touchstart', e => {
-        const t = e.touches[0];
-        if (t) {
-            const ed = getEdges(t.clientX, t.clientY);
-            if (ed) {
-                startResize(t.clientX, t.clientY, ed);
-                e.preventDefault();
-            }
-        }
-    }, { passive: false });
-    container.addEventListener('mousemove', e => {
-        if (resize) return;
-        const ed = getEdges(e.clientX, e.clientY);
-        container.style.cursor = ed ? cursorFor(ed) : '';
-    });
-
-    const clamp = (val, min, max) => Math.min(Math.max(val, min), max);
     const savePos = () => localStorage.setItem('chatbotPos', JSON.stringify({
         left: container.offsetLeft,
         top: container.offsetTop
@@ -217,62 +139,41 @@ document.addEventListener('DOMContentLoaded', () => {
         height: container.offsetHeight
     }));
 
-    const handleMove = (x, y) => {
-        if (drag) {
-            const vw = document.documentElement.clientWidth;
-            const vh = document.documentElement.clientHeight;
-            let l = x - offsetX;
-            let t = y - offsetY;
-            l = clamp(l, 0, vw - container.offsetWidth);
-            t = clamp(t, 0, vh - container.offsetHeight);
-            container.style.left = l + 'px';
-            container.style.top = t + 'px';
-        } else if (resize) {
-            let w = startW;
-            let h = startH;
-            if (resize.right) w += x - startX;
-            if (resize.bottom) h += y - startY;
-            if (resize.left) w -= x - startX;
-            if (resize.top) h -= y - startY;
+    header.addEventListener('mousedown', e => {
+        drag = true;
+        offsetX = e.clientX - container.offsetLeft;
+        offsetY = e.clientY - container.offsetTop;
+        document.body.style.userSelect = 'none';
+    });
+    header.addEventListener('touchstart', e => {
+        const t = e.touches[0];
+        if (!t) return;
+        drag = true;
+        offsetX = t.clientX - container.offsetLeft;
+        offsetY = t.clientY - container.offsetTop;
+        document.body.style.userSelect = 'none';
+    }, { passive: true });
 
-            w = clamp(w, 320, 560);
-            h = clamp(h, 260, 720);
-
-            let l = startL;
-            let t = startT;
-            if (resize.left) l = startL + (startW - w);
-            if (resize.top)  t = startT + (startH - h);
-            const vw = document.documentElement.clientWidth;
-            const vh = document.documentElement.clientHeight;
-            l = clamp(l, 0, vw - w);
-            t = clamp(t, 0, vh - h);
-
-            container.style.width  = w + 'px';
-            container.style.height = h + 'px';
-            container.style.left   = l + 'px';
-            container.style.top    = t + 'px';
-        }
+    const move = (x, y) => {
+        if (!drag) return;
+        container.style.left = (x - offsetX) + 'px';
+        container.style.top = (y - offsetY) + 'px';
     };
 
-    document.addEventListener('mousemove', e => handleMove(e.clientX, e.clientY));
+    document.addEventListener('mousemove', e => move(e.clientX, e.clientY));
     document.addEventListener('touchmove', e => {
         const t = e.touches[0];
-        if (t) handleMove(t.clientX, t.clientY);
+        if (t) move(t.clientX, t.clientY);
     }, { passive: false });
 
-    const endAction = () => {
-        if (drag) {
-            drag = false;
-            document.body.style.userSelect = '';
-            savePos();
-        }
-        if (resize) {
-            resize = null;
-            document.body.style.userSelect = '';
-            saveSize();
-        }
-        container.style.cursor = '';
+    const endDrag = () => {
+        if (!drag) return;
+        drag = false;
+        document.body.style.userSelect = '';
+        savePos();
     };
-    document.addEventListener('mouseup', endAction);
-    document.addEventListener('touchend', endAction);
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('touchend', endDrag);
+
+    new ResizeObserver(saveSize).observe(container);
 });
