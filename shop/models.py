@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 
+
 # Категорії товарів
 class Category(models.Model):
     name = models.CharField(max_length=128)
@@ -10,6 +11,7 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
 
 # Товари
 class Product(models.Model):
@@ -36,13 +38,16 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+
 # Кошики
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     session_key = models.CharField(max_length=64, null=True, blank=True)
+
     def __str__(self):
         return f"Cart #{self.pk} (User: {self.user})"
+
 
 # Товари в кошику
 class CartItem(models.Model):
@@ -52,6 +57,7 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f"{self.product} x{self.quantity}"
+
 
 # Замовлення
 class Order(models.Model):
@@ -64,6 +70,7 @@ class Order(models.Model):
     def __str__(self):
         return f"Order #{self.pk} by {self.user}"
 
+
 # Позиції в замовленні
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name="items")
@@ -73,6 +80,7 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product} x{self.quantity}"
+
 
 # Бонуси
 class BonusPoint(models.Model):
@@ -84,6 +92,7 @@ class BonusPoint(models.Model):
     def __str__(self):
         return f"{self.user}: {self.points} points"
 
+
 # Часті питання
 class FAQ(models.Model):
     question = models.CharField(max_length=255, unique=True)
@@ -91,6 +100,7 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question[:60]
+
 
 # Чат-бот звернення/історія діалогів (опціонально)
 class ChatHistory(models.Model):
@@ -101,4 +111,3 @@ class ChatHistory(models.Model):
 
     def __str__(self):
         return f"{'Bot' if self.is_bot else self.user}: {self.message[:40]}"
-

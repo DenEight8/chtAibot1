@@ -1,10 +1,9 @@
-#exeshop/urls.py
+# exeshop/urls.py
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
-from shop import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),

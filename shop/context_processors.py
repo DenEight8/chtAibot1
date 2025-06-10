@@ -1,5 +1,6 @@
 from .models import Category, CartItem
 
+
 def base_vars(request):
     """Підкидає всі категорії й лічильник кошика в кожен шаблон."""
     categories = Category.objects.all()

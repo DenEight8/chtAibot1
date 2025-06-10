@@ -1,9 +1,9 @@
 # exeshop/views.py
 from types import SimpleNamespace
-from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
-from django.shortcuts import render
+
 
 # ──────────────────────────────────────────────────────────────
 # Головна
@@ -74,6 +74,7 @@ def chat_endpoint(request):
     else:
         reply = "Поставте, будь ласка, запитання."
     return JsonResponse({"response": reply})
+
 
 def order_create(request):
     # Заглушка для сторінки оформлення замовлення
