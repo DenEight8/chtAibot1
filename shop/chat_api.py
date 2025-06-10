@@ -118,8 +118,17 @@ def _find_category(query: str) -> Optional[Category]:
 
 
 def _find_product(name_part: str) -> Optional[Product]:
+    """Search product by name or slug."""
+    part = name_part.strip()
+    part_slug = slugify(part)
+    from django.db.models import Q
+
     return (
-        Product.objects.filter(name__icontains=name_part.strip())
+        Product.objects.filter(
+            Q(name__icontains=part) |
+            Q(slug__icontains=part_slug) |
+            Q(description__icontains=part)
+        )
         .only("name", "price", "description")
         .first()
     )

@@ -13,6 +13,7 @@ from django.http import (
     JsonResponse,
 )
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.text import slugify
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
@@ -109,7 +110,16 @@ def api_search(request: HttpRequest) -> JsonResponse:
     q = request.GET.get("q", "").strip()
     if not q:
         return JsonResponse([], safe=False)
-    products = Product.objects.filter(name__icontains=q)[:10]
+    q_slug = slugify(q)
+    from django.db.models import Q
+
+    products = (
+        Product.objects.filter(
+            Q(name__icontains=q) |
+            Q(slug__icontains=q_slug) |
+            Q(description__icontains=q)
+        )[:10]
+    )
     return JsonResponse(
         [{"label": p.name, "url": p.get_absolute_url()} for p in products],
         safe=False,

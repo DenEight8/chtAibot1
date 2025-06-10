@@ -7,8 +7,8 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "exeshop.settings")
 os.environ.setdefault("ALLOWED_HOSTS", "testserver")
 django.setup()
 
-from shop.chat_api import _run_safe_sql
-from shop.models import Category, Product
+from shop.chat_api import _run_safe_sql  # noqa: E402
+from shop.models import Category, Product  # noqa: E402
 
 
 class ChatApiTests(TestCase):
